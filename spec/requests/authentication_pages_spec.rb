@@ -9,9 +9,8 @@ describe "AuthenticationPages" do
       it{should have_selector('h1', text:'login')}
     end
 
-    let(:user) {User.create(name:'ExampleUser', email:'hah@gmail.com',
-        password: 'foobar', password_confirmation:'foobar')}
-
+    let(:user) {FactoryGirl.create(:user); }
+    
     describe "with a valid password" do
       before do
         fill_in "Email", with: user.email

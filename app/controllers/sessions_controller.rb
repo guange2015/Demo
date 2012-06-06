@@ -13,6 +13,7 @@ class SessionsController < ApplicationController
     end
   end
 
+  # TODO: logout
   def destory
   end
 end

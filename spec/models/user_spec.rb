@@ -1,9 +1,8 @@
 require 'spec_helper'
 
 describe User do
-  subject {@user}
-  before {@user = User.new(name:'ExampleUser', email:'hah@gmail.com',
-        password: 'foobar', password_confirmation:'foobar') }
+  subject {user}
+  let (:user) {FactoryGirl.build(:user)}
 
   it {should be_valid}
   it {should respond_to(:name)}
@@ -12,12 +11,26 @@ describe User do
   it {should respond_to(:password)}
   it {should respond_to(:password_confirmation)}
 
-  describe "Login" do
-    it "should authenticate success when use valid password" do
-      @user.authenticate('foobar').should be_true
+
+
+  describe "#authenticate" do
+    it "should authenticate success with valid password" do
+      user.authenticate('foobar').should be_true
     end
-    it "should authenticate fail when use invalid password" do
-      @user.authenticate('invalid').should be_false
+    it "should authenticate fail with invalid password" do
+      user.authenticate('invalid').should be_false
     end
   end
 end
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :integer         not null, primary key
+#  name            :string(255)
+#  email           :string(255)
+#  created_at      :datetime        not null
+#  updated_at      :datetime        not null
+#  password_digest :string(255)
+#
+
